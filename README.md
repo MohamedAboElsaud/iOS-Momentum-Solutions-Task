@@ -40,7 +40,15 @@ That's why this feature can help you to achieve that
 - Swift Concurrency Async/Await
 - Architectural pattern (MVVM)
 
-## Getting Started
+## ScreenShots 
+| Home | Coming Soon | Details |
+| :-: | :-: | :-: |
+| <img src="https://raw.githubusercontent.com/MohamedAboElsaud/iOS-Momentum-Solutions-Task/refs/heads/master/Assets/Simulator%20Screenshot%20-%20device%2018.3%20-%202025-07-27%20at%2005.28.46-compressed.heic"/> | <img src="https://raw.githubusercontent.com/MohamedAboElsaud/iOS-Momentum-Solutions-Task/refs/heads/master/Assets/Simulator%20Screenshot%20-%20device%2018.3%20-%202025-07-27%20at%2005.28.54-compressed.heic"/> | <img src="https://raw.githubusercontent.com/MohamedAboElsaud/iOS-Momentum-Solutions-Task/refs/heads/master/Assets/Simulator%20Screenshot%20-%20device%2018.3%20-%202025-07-27%20at%2005.29.03-compressed.heic"/> 
+
+| Home | Coming Soon | Details |
+| :-: | :-: | :-: |
+| <img src="https://raw.githubusercontent.com/MohamedAboElsaud/iOS-Momentum-Solutions-Task/refs/heads/master/Assets/Simulator%20Screenshot%20-%20device%2018.3%20-%202025-07-27%20at%2005.29.41-compressed.heic"/> | <img src="https://raw.githubusercontent.com/MohamedAboElsaud/iOS-Momentum-Solutions-Task/refs/heads/master/Assets/Simulator%20Screenshot%20-%20device%2018.3%20-%202025-07-27%20at%2005.29.48-compressed.heic"/> | <img src="https://raw.githubusercontent.com/MohamedAboElsaud/iOS-Momentum-Solutions-Task/refs/heads/master/Assets/Simulator%20Screenshot%20-%20device%2018.3%20-%202025-07-27%20at%2005.29.59-compressed.heic"/> 
+
 
 ## Requirements
 
