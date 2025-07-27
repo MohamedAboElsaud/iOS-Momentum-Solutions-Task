@@ -1,8 +1,8 @@
 //
-//  HomeViewPresenter.swift
-//  Netflix Clone
+//  HomeView.swift
+//  iOS Momentum Solutions Task
 //
-//  Created by A on 07/08/2023.
+//  Created by mohamed ahmed on 26/07/2025.
 //
 
 import Foundation
@@ -21,14 +21,14 @@ class HomeViewPresenter {
         self.view = view
     }
     
-    func returnMovieArray(with cell : TableViewCell ,at indexPath: IndexPath) {
+    func returnMovieArray(with cell : CollectionViewTableViewCell ,at indexPath: IndexPath) {
         switch indexPath.section {
         case sections.TrendingMovies.rawValue:
             Networking.shared.fetchData(with: #"trending/movie/day"#) { results in
                 switch results {
                 case .success(let movie):
-                    cell.passTitleArray(title: movie)
-                    
+                    cell.configure(with: movie)
+
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -38,7 +38,7 @@ class HomeViewPresenter {
             Networking.shared.fetchData(with: #"movie/popular"#) { results in
                 switch results {
                 case .success(let movie):
-                    cell.passTitleArray(title: movie)
+                    cell.configure(with: movie)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -48,7 +48,7 @@ class HomeViewPresenter {
             Networking.shared.fetchData(with: #"trending/tv/day"#) { results in
                 switch results {
                 case .success(let TV):
-                    cell.passTitleArray(title: TV)
+                    cell.configure(with: TV)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -58,7 +58,7 @@ class HomeViewPresenter {
             Networking.shared.fetchData(with: #"movie/upcoming"#) { results in
                 switch results {
                 case .success(let movie):
-                    cell.passTitleArray(title: movie)
+                    cell.configure(with: movie)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -68,13 +68,13 @@ class HomeViewPresenter {
             Networking.shared.fetchData(with: #"movie/top_rated"#) { results in
                 switch results {
                 case .success(let movie):
-                    cell.passTitleArray(title: movie)
+                    cell.configure(with: movie)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
         default:
-            cell.passTitleArray(title: [])
+            cell.configure(with: [])
         }
     }
     

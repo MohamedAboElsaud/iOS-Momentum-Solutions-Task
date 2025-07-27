@@ -8,11 +8,13 @@
 import UIKit
 import Combine
 
-class HomeViewController: UIViewController {
+
+class HomeViewController: UIViewController, HomeView {
 
     private var cancellables = Set<AnyCancellable>() // Store subscriptions to prevent premature cancellation
 
-    let sectionTitles = ["Trending Movies","Trending Tv", "Popular",  "Upcoming Movie","Top rated"]
+    var homePresenter : HomeViewPresenter!
+
     private let homeFeedTable: UITableView = {
         let table = UITableView()
         table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
@@ -21,6 +23,8 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        homePresenter = HomeViewPresenter(self)
+
         view.backgroundColor = .systemBackground
 
         view.addSubview(homeFeedTable)
@@ -29,41 +33,22 @@ class HomeViewController: UIViewController {
 
         configureNavbar()
 
-        let headerView = MainHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
+        let headerView = MainHeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 210))
         homeFeedTable.tableHeaderView = headerView
 
-        getTrendingMovies()
     }
 
-    private func getTrendingMovies(){
-//        APICaller.shared.getTrendingMovies { result in
-//            switch result{
-//
-//            case .success(let movie):
-//                print(movie)
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-        APICaller.shared.getTrendingTvs { _ in
-
-        }
-    }
 
 
 
     private func configureNavbar(){
-
-        var image = UIImage(named: "Nlogo")
-        image = image?.withRenderingMode(.alwaysOriginal)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
 
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil),
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
 
         ]
-        navigationController?.navigationBar.tintColor = .white
+
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -71,50 +56,49 @@ class HomeViewController: UIViewController {
     }
 
 }
+
+
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionTitles.count
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else{
-            return UITableViewCell()
-        }
-
-        return cell
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        200
-    }
-
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         40
     }
 
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return homePresenter.sectionTitles.count
     }
-
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return homePresenter.sectionTitles[section]
+    }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else {return}
-
-        header.textLabel?.font = .systemFont(ofSize: 18,weight: .semibold)
-        header.textLabel?.frame = CGRect(x: header.bounds.origin.x, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
-        header.textLabel?.textColor = .white
-        header.textLabel?.text = header.textLabel?.text?.capitalizeFirstLetter()
-
-    }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let defaultOffset = view.safeAreaInsets.top
-        let offset = scrollView.contentOffset.y + defaultOffset
-        navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
+        header.textLabel?.font = .systemFont(ofSize: 17, weight: .semibold)
+        header.textLabel?.textColor = .label
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier) as? CollectionViewTableViewCell  else {return UITableViewCell() }
+
+
+               homePresenter.returnMovieArray(with: cell, at: indexPath)
+               //cell.delegate = self
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        230
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        80
+    }
+
+    func reloadTableView() {
+        DispatchQueue.main.async {
+            self.homeFeedTable.reloadData()
+        }
+    }
 }

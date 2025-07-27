@@ -12,15 +12,6 @@ enum APIError: Error{
     case ErrorToGetData
 }
 
-struct Constants{
-    static let API_KEY = "88eb46b0e8f95dec5a9558050b030d0c"
-    static let baseURL = "https://api.themoviedb.org"
-//    https://api.themoviedb.org/3/trending/all/day?api_key=88eb46b0e8f95dec5a9558050b030d0c
-}
-
-
-import Foundation
-
 let APIKey = "88eb46b0e8f95dec5a9558050b030d0c"
 let youtubeAPIKey = "AIzaSyDqX8axTGeNpXRiISTGL7Tya7fjKJDYi4g"
 
@@ -137,40 +128,3 @@ class Networking {
 
 
 }
-
-
-
-
-
-
-//
-//    public func getProducts()
-//    async  {
-//        let url = URL(string: "https://api.themoviedb.org/3/trending/movie/day")!
-//        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
-//        let queryItems: [URLQueryItem] = [
-//          URLQueryItem(name: "language", value: "en-US"),
-//        ]
-//        components.queryItems = components.queryItems.map { $0 + queryItems } ?? queryItems
-//
-//        var request = URLRequest(url: components.url!)
-//        request.httpMethod = "GET"
-//        request.timeoutInterval = 10
-//        request.allHTTPHeaderFields = [
-//          "accept": "application/json",
-//          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4OGViNDZiMGU4Zjk1ZGVjNWE5NTU4MDUwYjAzMGQwYyIsIm5iZiI6MTc1MzM1NjkzMy42NTY5OTk4LCJzdWIiOiI2ODgyMWE4NTRhMjdlNTQyYWVkOWEyODciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.ThXHPI2gSBBiTOS7HlF5AGgkFT0vEAfSlbSqS-DUlDc"
-//        ]
-//
-//        do {
-//            let (data, _) = try await URLSession.shared.data(for: request)
-//            // Process the received data here
-//            print(String(decoding: data, as: UTF8.self))
-//
-//        } catch {
-//            // Handle the error here
-//            print("Error during network request: \(error.localizedDescription)")
-//            // You can also perform specific error handling based on the error type
-//            // e.g., if let urlError = error as? URLError { ... }
-//        }
-//    }
-

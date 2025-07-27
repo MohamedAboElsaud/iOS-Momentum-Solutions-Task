@@ -14,7 +14,7 @@ class MainTabBarViewController: UITabBarController {
         view.backgroundColor = .red
 
         let VC1 = UINavigationController(rootViewController: HomeViewController())
-        let VC2 = UINavigationController(rootViewController: UpComingViewController())
+        let VC2 = UINavigationController(rootViewController: UpcomingViewController())
         let VC3 = UINavigationController(rootViewController: SearchViewController())
 
         VC1.tabBarItem.image = UIImage(systemName: "house")
