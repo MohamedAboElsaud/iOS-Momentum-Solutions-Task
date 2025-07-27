@@ -1,8 +1,8 @@
 //
 //  TitlePreviewViewModel.swift
-//  Swift-Netflix
+//  iOS Momentum Solutions Task
 //
-//  Created by Okan Orkun on 9.07.2023.
+//  Created by mohamed ahmed on 27/07/2025.
 //
 
 import Foundation
